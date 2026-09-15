@@ -1,5 +1,5 @@
 
---Find students whose calculated attendance rate is below 90%.
+-- Find students whose calculated attendance rate is below 90%.
 
 SELECT s.studentID,
         Name,
@@ -12,9 +12,9 @@ ON s.studentID = a.studentID
 GROUP BY s.studentID, Name
 HAVING Calculated_AttendanceRate < 90;
 
-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
 
---Find the student with the highest GPA in each grade level.
+-- Find the student with the highest GPA in each grade level.
 
 SELECT StudentID, 
     Name, GradeLevel,  
@@ -25,9 +25,9 @@ WHERE GPA = (SELECT MAX(GPA)
 GROUP BY StudentID, Name, GradeLevel
 ORDER BY GradeLevel;
 
---------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
 
---Find the student with the highest FinalGrade in every course.
+-- Find the student with the highest FinalGrade in every course.
 
 SELECT s.StudentID, 
     Name AS "Student Name", 
@@ -44,9 +44,9 @@ WHERE FinalGrade IN ( SELECT MAX(FinalGrade)
 GROUP BY s.studentID, Name, CourseName
 ORDER BY CourseName;
 
--------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
 
---Find the teacher whose students have the highest average FinalGrade.
+-- Find the teacher whose students have the highest average FinalGrade.
 
 SELECT TeacherName, 
        ROUND(AVG(FinalGrade), 2) AS HighestAvg_FinalGrade
@@ -59,7 +59,7 @@ GROUP BY t.TeacherID, TeacherName
 ORDER BY HighestAvg_FinalGrade DESC
 FETCH NEXT 1 ROWS ONLY;
 
--------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 /*  
     Students taking multiple courses
@@ -101,7 +101,7 @@ HAVING GPA > 3.8 AND
        AttendanceRate >= 95 AND 
        Average_FinalGrade >= 84;
 
------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 /*
 
@@ -110,6 +110,7 @@ HAVING GPA > 3.8 AND
     Average FinalGrade
     AttendanceRate
 */
+
 SELECT s.StudentID,
         Name,
         GPA,
@@ -121,7 +122,7 @@ ON s.StudentID = e.StudentID
 GROUP BY s.StudentID, Name, GPA, AttendanceRate
 ORDER BY GPA DESC, Average_FinalGrade DESC,AttendanceRate DESC;
 
------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 /*
     Course difficulty
@@ -135,12 +136,13 @@ ON c.CourseID = e.CourseID
 GROUP BY CourseName
 HAVING Average_FinalGrade < 70;
 
-------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 /*
     Teacher workload ranking
     Rank teachers from highest to lowest based on the number of students they teach.
 */
+
 SELECT  t.TeacherID AS "Teacher ID", 
         TeacherName AS "TEacher Name",
         COUNT(e.StudentID) AS "Total Students"
@@ -152,7 +154,7 @@ ON c.CourseID = e.CourseID
 GROUP BY t.TeacherID, TeacherName
 ORDER BY "Total Students" DESC;
 
-----------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 /*
     Student report card
@@ -167,6 +169,7 @@ ORDER BY "Total Students" DESC;
     Final Grade
     Average Assessment Score
 */
+
 SELECT  Name,
         s.GradeLevel,
         s.GPA,
@@ -226,7 +229,7 @@ GROUP BY s.StudentId,
          TeacherName,
          FinalGrade;
 
----------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 /*
     Write a SQL query that displays every student's name, the course they are enrolled in, and the teacher who teaches that course.
@@ -235,6 +238,7 @@ GROUP BY s.StudentId,
 
         StudentName | CourseName | TeacherName
 */
+
 SELECT  Name AS StudentName,
         CourseName,
         TeacherName
@@ -244,6 +248,5 @@ WHERE s.StudentID = e.StudentID AND
       c.TeacherID = t.TeacherID;
 
 
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
       
