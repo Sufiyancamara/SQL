@@ -3,20 +3,21 @@
                                                         Date: 04/20/2026
                                                                                         */
 
+-------------------------------------------------------------------------------------------------------------------------------------------
 
--- I need a report showing all students who were absent more than 4 days.
+          -- I need a report showing all students who were absent more than 4 days.
 
 SELECT name, s.STUDENTID, COUNT(*)
 FROM student s
 JOIN attendance a 
 ON s.StudentID = a.StudentID
-WHERE STATUS = 'Absent' --AND Count(*) > 4
+WHERE STATUS = 'Absent'
 GROUP BY name, s.StudentID
 HAVING COUNT(*) > 4;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Find how many students are assigned to each teacher through their courses.
+        -- Find how many students are assigned to each teacher through their courses.
 
 SELECT TEACHERNAME, COUNT(*) AS STUDENT
 FROM Student s 
@@ -30,7 +31,8 @@ GROUP BY TEACHERNAME;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Find the number of students enrolled in each course.
+        -- Find the number of students enrolled in each course.
+
 SELECT c.CourseName, COUNT(*) AS Students
 FROM Student s 
 JOIN ENROLLMENT e 
@@ -39,9 +41,9 @@ JOIN Courses c
 on e.CourseID = c.CourseID
 GROUP BY c.CourseName;
 
+-------------------------------------------------------------------------------------------------------------------------------------------
 
-
--- Find Students who have assessment record.
+        -- Find Students who have assessment record.
 
 SELECT s.studentID, Name, assessmenttype
 FROM Student s 
@@ -52,7 +54,7 @@ GROUP BY name, s.studentID, assessmenttype;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Find the course with the highest number of enrolled students
+        -- Find the course with the highest number of enrolled students
 
 SELECT CourseName, COUNT(*) AS TOtalStudent
 FROM COURSES c
@@ -66,7 +68,7 @@ FETCH FIRST 1 ROWS ONLY;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Find all students taking courses taught by Robert Anderson.
+        -- Find all students taking courses taught by Robert Anderson.
 
 SELECT *
 FROM Student s, Enrollment e, courses c, teachers t
@@ -75,7 +77,7 @@ AND TeacherName = 'Robert Anderson';
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Calculate the average FinalGrade for each course.
+        -- Calculate the average FinalGrade for each course.
 
 SELECT CourseName, ROUND(AVG(FINALGRADE), 2) AS Average
 FROM COURSES c
@@ -85,7 +87,7 @@ GROUP BY CourseName;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Find the course with the highest average final grade.
+        -- Find the course with the highest average final grade.
 
 SELECT CourseName, ROUND(AVG(FINALGRADE), 2) AS highestAverage
 FROM Courses c
@@ -97,7 +99,7 @@ FETCH FIRST 1 ROWS ONLY;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Calculate the average final grade for each teacher.
+        -- Calculate the average final grade for each teacher.
 
 SELECT TeacherName, ROUND(AVG(FINALGRADE), 2) AS AvgFinalGrade
 FROM Enrollment e, Courses c, Teachers t 
@@ -106,7 +108,7 @@ GROUP BY TeacherName;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- alculate the average final grade for each student across all their courses.
+            -- Calculate the average final grade for each student across all their courses.
 
 SELECT s.studentID AS "Student ID", Name AS "Student Name", ROUND(Avg(FINALGRADE), 2) AS "Average Final Grade"
 FROM Student s 
@@ -119,7 +121,7 @@ ORDER BY s.studentID, Name;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Find the top 10 students based on their average FinalGrade.
+        -- Find the top 10 students based on their average FinalGrade.
 
 SELECT s.studentID, Name, Round(AVG(FinalGrade), 2) AS "Average Student Grade"
 FROM Student s, ENROLLMENT e, Courses c 
@@ -130,7 +132,7 @@ FETCH NEXT 10 ROWS ONLY;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Retrieve Student Name, GPA and Average Final Grade for every student.
+        -- Retrieve Student Name, GPA and Average Final Grade for every student.
 
 SELECT s.STUDENTID, name AS "Student Name", GPA, ROUND(Avg(FinalGrade), 2) AS "Average Final Grade"
 FROM Student s, ENROLLMENT e 
@@ -139,7 +141,7 @@ GROUP BY S.studentID, name, GPA;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Retrieve all assessments for James Anderson.
+        -- Retrieve all assessments for James Anderson.
 
 SELECT s.studentID, Name, assessmenttype
 FROM Student s 
@@ -149,7 +151,7 @@ GROUP BY s.studentID, name, assessmenttype;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Calculate the average assessment score for each student.
+        -- Calculate the average assessment score for each student.
 
 SELECT s.studentID AS "Student ID", name AS "Student Name", ROUND(AVG(score), 2) AS "Average SCore"
 FROM Student s, assessments a 
@@ -158,7 +160,7 @@ GROUP BY s.studentID, name;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Calculate the average score for Quiz, Test, Project, and Final Exam.
+        -- Calculate the average score for Quiz, Test, Project, and Final Exam.
 
 SELECT assessmenttype AS assessments, Round(Avg(score), 2) AS "Average Score"
 FROM assessments
@@ -166,7 +168,7 @@ GROUP BY assessmenttype;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Find the student who received the highest assessment score.
+        -- Find the student who received the highest assessment score.
 
 SELECT s.STUDENTID, name, SCORE
 FROM Student s, assessments a 
@@ -176,7 +178,7 @@ score = ( SELECT Max(Score)
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Find the average assessment score for each course.
+        -- Find the average assessment score for each course.
 
 SELECT CourseName AS "Course Name", ROUND(AVG(score), 2) AS "Average Score"
 FROM COURSES c 
@@ -186,7 +188,7 @@ GROUP BY CourseName;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Calculate the average assessment score for each teacher.
+        -- Calculate the average assessment score for each teacher.
 
 SELECT TeacherName AS "Teacher Name", ROUND(AVG(Score), 2) AS "Average SCore"
 FROM assessments a, courses c, teachers t 
@@ -195,7 +197,7 @@ GROUP BY TeacherName;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Count how many Present, Absent, and Late records exist.
+        -- Count how many Present, Absent, and Late records exist.
 
 SELECT status, COUNT(*)
 FROM attendance
@@ -203,7 +205,7 @@ GROUP BY status;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Retrieve all attendance records for James Anderson.
+        -- Retrieve all attendance records for James Anderson.
 
 SELECT * 
 FROM attendance
@@ -214,10 +216,10 @@ ORDER BY studentID;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-/* 
-    Calculate each student's attendance percentage based on the Attendance table
-    rather than using the Student.AttendanceRate column.
- */
+        /* 
+            Calculate each student's attendance percentage based on the Attendance table
+            rather than using the Student.AttendanceRate column.
+        */
 
 SELECT StudentID,
         COUNT(*) AS TotalAttendance,
@@ -228,13 +230,13 @@ GROUP BY StudentID;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-/* Display and compare the two values:
+        /* 
+          Display and compare the two values:
 
-   Student Name
-   Stored AttendanceRate
-   Calculated AttendanceRate
-
-*/
+           Student Name
+           Stored AttendanceRate
+           Calculated AttendanceRate
+        */
 
 SELECT  s.StudentID, 
         Name AS "Student Name", 
