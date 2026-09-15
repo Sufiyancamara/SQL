@@ -1,3 +1,9 @@
+                                                /*
+                                                        By Sufiyan Camara
+                                                        Date: 04/20/2026
+                                                                                        */
+
+
 -- Find students whose calculated attendance rate is below 90%.
 
 SELECT s.studentID,
