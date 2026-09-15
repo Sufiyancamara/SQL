@@ -1,3 +1,9 @@
+  										 /*
+                                                        By Sufiyan Camara
+                                                        Date: 04/20/2026
+                                                                                        */
+
+
 -- Retrieve all courses and teachers assigned to student James Anderson.
 SELECT 
     s.StudentID,
