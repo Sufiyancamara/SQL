@@ -1,3 +1,9 @@
+                                           /*
+                                                        By Sufiyan Camara
+                                                        Date: 04/20/2026
+                                                                                        */
+
+
 -- I need a report showing all students who were absent more than 4 days.
 
 SELECT name, s.STUDENTID, COUNT(*)
