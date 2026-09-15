@@ -16,9 +16,10 @@ ON t.TEACHERID = c.TEACHERID
 where s.NAME = 'James Anderson'
 order by s.STUDENTID;
 
-
+---------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Total student for each teacher 
+
 SELECT t.TeacherName, count(*) As TotalStudent
 FROM TEACHERS t
 JOIN COURSES c
@@ -29,7 +30,7 @@ JOIN STUDENT s
 ON e.STUDENTID = s.STUDENTID
 Group BY t.TEACHERNAME;
 
-
+--------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Select all student who are either in Amanda Lee or Steven Green's class 
 SELECT s.StudentID, s.Name, t.TEACHERNAME
@@ -44,29 +45,31 @@ where t.TEACHERNAME IN ('Amanda Lee', 'Steven Green')
 GROUP BY s.STUDENTID, s.NAME, t.TEACHERNAME
 ORDER BY t.TEACHERNAME;
 
+------------------------------------------------------------------------------------------------------------------------------------------
 
+--Retrieve the StudentID, Name, GradeLevel, and GPA of all students.
 
-/* Retrieve the StudentID, Name, GradeLevel, and GPA of all students.*/
 SELECT StudentID, Name, Gradelevel, GPA
 FROM Student;
 
+-----------------------------------------------------------------------------------------------------------------------------------------
 
+-- Find all students in Grade 10. 
 
-/* Find all students in Grade 10. */
 SELECT *
 FROM Student
 WHERE GradeLevel = 10;
 
+----------------------------------------------------------------------------------------------------------------------------------------
 
-
-/*Find students who have a GPA greater than 3.5 and an AttendanceRate greater than 95%. */
+-- Find students who have a GPA greater than 3.5 and an AttendanceRate greater than 95%. 
 SELECT *
 FROM Student
 WHERE GPA > 3.5 AND Attendancerate > 95;
 
+---------------------------------------------------------------------------------------------------------------------------------------
 
-
-/*Retrieve all students and sort them by GPA from highest to lowest.*/
+-- Retrieve all students and sort them by GPA from highest to lowest.
 SELECT *
 FROM Student
 ORDER BY GPA DESC;
